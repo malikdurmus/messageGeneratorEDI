@@ -1,5 +1,6 @@
 package com.example.messagegeneratoredi;
 
+
 public class OrderData {
     private String userAbbreviation;
     private String orgCode;
@@ -78,7 +79,9 @@ public class OrderData {
                 ", plantCode='" + plantCode + '\'' +
                 ", today=" + today +
                 ", tomorrow=" + tomorrow +
-                '}';
+                '}'
+
+                ;
     }
 
 

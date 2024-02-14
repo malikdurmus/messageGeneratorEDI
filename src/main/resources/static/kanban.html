@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDIFACT Message Creation - Kanban</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .checkbox-group {
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group label {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3E8E41;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Create EDIFACT Kanban Message</h1>
+    <form id="kanban-form">
+        <div class="form-group">
+            <label for="user-abbreviation">User Abbreviation:</label>
+            <input type="text" id="user-abbreviation" name="userAbbreviation" required>
+        </div>
+        <div class="form-group">
+            <label for="organisation-code">Organisation Code:</label>
+            <input type="text" id="organisation-code" name="orgCode" required>
+        </div>
+        <div class="form-group">
+            <label for="mail-partner">Mail Partner:</label>
+            <input type="text" id="mail-partner" name="mailPartner" required>
+        </div>
+        <div class="form-group">
+            <label for="seller-no">Seller No:</label>
+            <input type="text" id="seller-no" name="sellerNo" required>
+        </div>
+        <div class="form-group">
+            <label for="plant-code">Plant Code:</label>
+            <input type="text" id="plant-code" name="plantCode" required>
+        </div>
+        <div class="checkbox-group">
+            <label for="today">Today</label>
+            <input type="checkbox" id="today" name="deliveryDates[]" value="Today">
+            <label for="tomorrow">Tomorrow</label>
+            <input type="checkbox" id="tomorrow" name="deliveryDates[]" value="Tomorrow">
+        </div>
+        <button type="submit">Create Message</button>
+    </form>
+</div>
+
+<script>
+    const form = document.getElementById('kanban-form');
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const data = {
+            userAbbreviation: document.getElementById('user-abbreviation').value,
+            orgCode: document.getElementById('organisation-code').value,
+            mailPartner: document.getElementById('mail-partner').value,
+            sellerNo: document.getElementById('seller-no').value,
+            plantCode: document.getElementById('plant-code').value,
+            deliveryDates: []
+        };
+
+        const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]:checked');
+        checkboxes.forEach(checkbox => {
+            data.deliveryDates.push(checkbox.value);
+        });
+        console.log("Sending data to backend:", JSON.stringify(data));
+
+        fetch('/kanban/processKanban', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Network response was not ok: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(responseData => {
+                console.log("Data sent successfully:", responseData);
+                // Handle further actions based on response data
+            })
+            .catch(error => {
+                console.error("Error sending data:", error);
+                // Handle any errors that occurred
+            });
+    });
+</script>
+</body>
+</html>

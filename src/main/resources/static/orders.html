@@ -109,8 +109,7 @@ button:hover {
       });
       console.log("Sending data to backend:", JSON.stringify(data));
 
-      // Replace '/api/orders' with your actual backend endpoint
-      fetch('/processOrder', {
+      fetch('/orders/processOrder', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
