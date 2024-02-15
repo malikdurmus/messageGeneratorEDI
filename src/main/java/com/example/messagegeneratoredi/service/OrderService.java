@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Service
-public class OrderService implements MessageService {
+public class OrderService implements MessageService<OrderData> {
+
 
     @PostMapping("/orders/processOrder")
     @ResponseBody
+    @Override
     public boolean processOrder(@RequestBody OrderData orderData) { //OrderData should changed -> OrderMessage
         // Process the order data here
         System.out.println("Received order data: " + orderData.toString());
