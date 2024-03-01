@@ -5,102 +5,299 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>File Naming Process</title>
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     .form-group {
       margin-bottom: 20px;
     }
   </style>
 </head>
-<body>
-<div class="container mt-5">
-  <h2>File Naming Process</h2>
+<body style="background-color: blanchedalmond;">
+<h1 class="display-4">Orders</h1>
+<div class="container m-5 p-2" style="background-color: whitesmoke;">
+
   <div class="section">
-    <h3>General</h3>
-    <div class="form-group">
-      <label for="process">Process:</label>
-      <input type="text" class="form-control" id="process" placeholder="Please provide the process for file naming">
-    </div>
-    <div class="form-group">
-      <label for="folder">Folder:</label>
-      <input type="text" class="form-control" id="folder">
-      <button class="btn btn-primary" onclick="selectFile()">Select File</button>
-    </div>
-    <div class="form-group">
-      <label for="userAbbreviation">User Abbreviation:</label>
-      <input type="text" class="form-control" id="userAbbreviation" placeholder="Please provide the user abbreviation">
-    </div>
-    <div class="form-group">
-      <label for="orgcode">Orgcode:</label>
-      <input type="text" class="form-control" id="orgcode" value="SCMPD">
-    </div>
-    <div class="form-group">
-      <label for="mailpartner">Mailpartner:</label>
-      <input type="text" class="form-control" id="mailpartner" value="TSTOBLE">
-    </div>
-    <div class="form-group">
-      <label for="sellerNo">Seller No.:</label>
-      <input type="text" class="form-control" id="sellerNo" value="01_WEB">
-    </div>
-    <div class="form-group">
-      <label for="plantcode">Plantcode:</label>
-      <input type="text" class="form-control" id="plantcode" value="POR_03">
-    </div>
-    <div class="form-group">
-      <label for="unloading">Unloading:</label>
-      <input type="text" class="form-control" id="unloading" value="Warehouse">
-    </div>
-    <div class="form-group">
-      <label for="unitOfMeasurement">Unit of Measurement:</label>
-      <select class="form-control" id="unitOfMeasurement">
-        <option>EA</option>
-        <option>RB</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="startingNumber">Starting Number:</label>
-      <input type="number" class="form-control" id="startingNumber" value="1">
-    </div>
-    <div class="form-group">
-      <label for="numberOfFiles">Number of Files:</label>
-      <input type="number" class="form-control" id="numberOfFiles" value="1">
-    </div>
-    <div class="form-group">
-      <label for="numberOfPositions">Number of Positions:</label>
-      <input type="text" class="form-control" id="numberOfPositions" value=".">
-    </div>
-    <div class="form-group">
-      <label for="currency">Currency:</label>
-      <input type="text" class="form-control" id="currency" value="EUR">
-    </div>
-    <div class="form-group">
-      <label for="delivery">Delivery:</label>
-      <input type="text" class="form-control" id="delivery" value="DY">
-    </div>
-    <div class="form-group">
-      <label for="consigneeLevel">Level of Consignee:</label>
-      <select class="form-control" id="consigneeLevel">
-        <option>Order level</option>
-        <option>Position level</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="invoiceeLevel">Level of Invoicee:</label>
-      <select class="form-control" id="invoiceeLevel">
-        <option>Order level</option>
-        <option>Position level</option>
-      </select>
+    <h3 class="display-5">General</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="process">Process:</label>
+          <input type="text" class="form-control" id="process" placeholder="Please provide the process for file naming">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="folder">Folder:</label>
+          <button class="btn btn-lg btn-primary">Select Folder</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="userAbbreviation">User Abbreviation:</label>
+          <input type="text" class="form-control" id="userAbbreviation" placeholder="Please provide the user abbreviation">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="orgcode">Orgcode:</label>
+          <input type="text" class="form-control" id="orgcode" value="SCMPD">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="mailpartner">Mailpartner:</label>
+          <input type="text" class="form-control" id="mailpartner" value="TSTOBLE">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="sellerNo">Seller No.:</label>
+          <input type="text" class="form-control" id="sellerNo" value="01_WEB">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="plantcode">Plantcode:</label>
+          <input type="text" class="form-control" id="plantcode" value="POR_03">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="unloading">Unloading:</label>
+          <input type="text" class="form-control" id="unloading" value="Warehouse">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="unitOfMeasurement">Unit of Measurement:</label>
+          <select class="form-control" id="unitOfMeasurement">
+            <option>EA</option>
+            <option>RB</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="startingNumber">Starting Number:</label>
+          <input type="number" class="form-control" id="startingNumber" value="1">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="numberOfFiles">Number of Files:</label>
+          <input type="number" class="form-control" id="numberOfFiles" value="1">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="numberOfPositions">Number of Positions:</label>
+          <input type="text" class="form-control" id="numberOfPositions" value=".">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="currency">Currency:</label>
+          <input type="text" class="form-control" id="currency" value="EUR">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="delivery">Delivery:</label>
+          <input type="text" class="form-control" id="delivery" value="DY">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="consigneeLevel">Level of Consignee:</label>
+          <select class="form-control" id="consigneeLevel">
+            <option>Order level</option>
+            <option>Position level</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label for="invoiceeLevel">Level of Invoicee:</label>
+          <select class="form-control" id="invoiceeLevel">
+            <option>Order level</option>
+            <option>Position level</option>
+          </select>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<div class="accordion m-5" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#requiredCollapse" aria-expanded="true" aria-controls="requiredCollapse">
+        Required
+      </button>
+    </h2>
+    <div id="requiredCollapse" class="accordion-collapse collapse show">
+      <div class="accordion-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="serviceStringAdvice">
+              <label class="form-check-label" for="serviceStringAdvice">
+                Service String Advice (No.1)
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="interchangeHeader">
+              <label class="form-check-label" for="interchangeHeader">
+                Interchange Header (No.2)
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="messageHeader">
+              <label class="form-check-label" for="messageHeader">
+                Message Header (No.3)
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="beginningOfMessage">
+              <label class="form-check-label" for="beginningOfMessage">
+                Beginning of the Message (No.4)
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="sectionControl">
+              <label class="form-check-label" for="sectionControl">
+                Section Control (No.274)
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="messageTrailer">
+              <label class="form-check-label" for="messageTrailer">
+                Message Trailer (No.281)
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="interchangeTrailer">
+              <label class="form-check-label" for="interchangeTrailer">
+                Interchange Trailer (No.282)
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dataSegmentsCollapse" aria-expanded="false" aria-controls="dataSegmentsCollapse">
+        Data Segments
+      </button>
+    </h2>
+    <div id="dataSegmentsCollapse" class="accordion-collapse collapse">
+      <div class="accordion-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-check">
+              <input class="form-check-input checkbox-trigger" type="checkbox" value="" id="orderDateCheckbox" data-bs-target="#orderDateTextbox">
+              <label class="form-check-label" for="orderDateCheckbox">
+                Order Date
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="orderDateTextbox" placeholder="MM/DD/YYYY" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-check">
+              <input class="form-check-input checkbox-trigger" type="checkbox" value="" id="validityStartDateCheckbox" data-bs-target="#validityStartDateTextbox">
+              <label class="form-check-label" for="validityStartDateCheckbox">
+                Validity Start Date
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="validityStartDateTextbox" placeholder="MM/DD/YYYY" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-check">
+              <input class="form-check-input checkbox-trigger" type="checkbox" value="" id="expiryDateCheckbox" data-bs-target="#expiryDateTextbox">
+              <label class="form-check-label" for="expiryDateCheckbox">
+                Expiry Date
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="expiryDateTextbox" placeholder="MM/DD/YYYY" disabled>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-check">
+              <input class="form-check-input checkbox-trigger" type="checkbox" value="" id="individualDateInformationCheckbox" data-bs-target="#individualDateInformationTextbox">
+              <label class="form-check-label" for="individualDateInformationCheckbox">
+                Individual Date Information
+              </label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="individualDateInformationTextbox" placeholder="MM/DD/YYYY" disabled>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
 <!-- Bootstrap JS -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
+  $(document).ready(function(){
+    $(".checkbox-trigger").change(function() {
+      var target = $(this).data('bs-target');
+      if(this.checked) {
+        $(target).prop("disabled", false);
+      } else {
+        $(target).prop("disabled", true);
+      }
+    });
+  });
   function selectFile() {
-    // Code to open system dialog for selecting file goes here
-    alert("This feature is not implemented yet.");
+    // Create an input element
+    var input = document.createElement('input');
+    // Set input type to file and webkitdirectory to open folder picker
+    input.type = 'file';
+    input.webkitdirectory = true;
+    // Set onchange event handler
+    input.onchange = function(event) {
+      var selectedFolder = event.target.files[0].path; // Get the selected folder path
+      alert("Selected folder: " + selectedFolder); // Display the selected folder path
+    };
+    // Trigger a click event on the input element
+    input.click();
   }
 </script>
 </body>
