@@ -3,134 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EDIFACT Message Creation - Orders</title>
-
+  <title>File Naming Process</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
-	body {
-  font-family: sans-serif;
-  margin: 0;
-  padding: 20px;
-}
-
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 10px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.checkbox-group {
-  margin-bottom: 15px;
-}
-
-.checkbox-group label {
-  margin-right: 10px;
-}
-
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #3E8E41;
-}
-
+    .form-group {
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Create EDIFACT Order Message</h1>
-    <form id="order-form">
-      <div class="form-group">
-        <label for="user-abbreviation">User Abbreviation:</label>
-        <input type="text" id="user-abbreviation" name="userAbbreviation" required>
-      </div>
-      <div class="form-group">
-        <label for="organisation-code">Organisation Code:</label>
-        <input type="text" id="organisation-code" name="orgCode" required>
-      </div>
-      <div class="form-group">
-        <label for="mail-partner">Mail Partner:</label>
-        <input type="text" id="mail-partner" name="mailPartner" required>
-      </div>
-      <div class="form-group">
-        <label for="seller-no">Seller No:</label>
-        <input type="text" id="seller-no" name="sellerNo" required>
-      </div>
-      <div class="form-group">
-        <label for="plant-code">Plant Code:</label>
-        <input type="text" id="plant-code" name="plantCode" required>
-      </div>
-      <div class="checkbox-group">
-        <label for="today">Today</label>
-        <input type="checkbox" id="today" name="deliveryDates[]" value="Today">
-        <label for="tomorrow">Tomorrow</label>
-        <input type="checkbox" id="tomorrow" name="deliveryDates[]" value="Tomorrow">
-      </div>
-      <button type="submit">Create Message</button>
-    </form>
+<div class="container mt-5">
+  <h2>File Naming Process</h2>
+  <div class="section">
+    <h3>General</h3>
+    <div class="form-group">
+      <label for="process">Process:</label>
+      <input type="text" class="form-control" id="process" placeholder="Please provide the process for file naming">
+    </div>
+    <div class="form-group">
+      <label for="folder">Folder:</label>
+      <input type="text" class="form-control" id="folder">
+      <button class="btn btn-primary" onclick="selectFile()">Select File</button>
+    </div>
+    <div class="form-group">
+      <label for="userAbbreviation">User Abbreviation:</label>
+      <input type="text" class="form-control" id="userAbbreviation" placeholder="Please provide the user abbreviation">
+    </div>
+    <div class="form-group">
+      <label for="orgcode">Orgcode:</label>
+      <input type="text" class="form-control" id="orgcode" value="SCMPD">
+    </div>
+    <div class="form-group">
+      <label for="mailpartner">Mailpartner:</label>
+      <input type="text" class="form-control" id="mailpartner" value="TSTOBLE">
+    </div>
+    <div class="form-group">
+      <label for="sellerNo">Seller No.:</label>
+      <input type="text" class="form-control" id="sellerNo" value="01_WEB">
+    </div>
+    <div class="form-group">
+      <label for="plantcode">Plantcode:</label>
+      <input type="text" class="form-control" id="plantcode" value="POR_03">
+    </div>
+    <div class="form-group">
+      <label for="unloading">Unloading:</label>
+      <input type="text" class="form-control" id="unloading" value="Warehouse">
+    </div>
+    <div class="form-group">
+      <label for="unitOfMeasurement">Unit of Measurement:</label>
+      <select class="form-control" id="unitOfMeasurement">
+        <option>EA</option>
+        <option>RB</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="startingNumber">Starting Number:</label>
+      <input type="number" class="form-control" id="startingNumber" value="1">
+    </div>
+    <div class="form-group">
+      <label for="numberOfFiles">Number of Files:</label>
+      <input type="number" class="form-control" id="numberOfFiles" value="1">
+    </div>
+    <div class="form-group">
+      <label for="numberOfPositions">Number of Positions:</label>
+      <input type="text" class="form-control" id="numberOfPositions" value=".">
+    </div>
+    <div class="form-group">
+      <label for="currency">Currency:</label>
+      <input type="text" class="form-control" id="currency" value="EUR">
+    </div>
+    <div class="form-group">
+      <label for="delivery">Delivery:</label>
+      <input type="text" class="form-control" id="delivery" value="DY">
+    </div>
+    <div class="form-group">
+      <label for="consigneeLevel">Level of Consignee:</label>
+      <select class="form-control" id="consigneeLevel">
+        <option>Order level</option>
+        <option>Position level</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="invoiceeLevel">Level of Invoicee:</label>
+      <select class="form-control" id="invoiceeLevel">
+        <option>Order level</option>
+        <option>Position level</option>
+      </select>
+    </div>
   </div>
-
-  <script>
-    const form = document.getElementById('order-form');
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-
-      const data = {
-        userAbbreviation: document.getElementById('user-abbreviation').value,
-        orgCode: document.getElementById('organisation-code').value,
-        mailPartner: document.getElementById('mail-partner').value,
-        sellerNo: document.getElementById('seller-no').value,
-        plantCode: document.getElementById('plant-code').value,
-        deliveryDates: []
-      };
-
-      const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]:checked');
-      checkboxes.forEach(checkbox => {
-        data.deliveryDates.push(checkbox.value);
-      });
-      console.log("Sending data to backend:", JSON.stringify(data));
-
-      fetch('/orders/processOrder', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Network response was not ok: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(responseData => {
-        console.log("Data sent successfully:", responseData);
-        // Handle further actions based on response data
-      })
-      .catch(error => {
-        console.error("Error sending data:", error);
-        // Handle any errors that occurred
-      });
-    });
-  </script>
+</div>
+<!-- Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+  function selectFile() {
+    // Code to open system dialog for selecting file goes here
+    alert("This feature is not implemented yet.");
+  }
+</script>
 </body>
 </html>
