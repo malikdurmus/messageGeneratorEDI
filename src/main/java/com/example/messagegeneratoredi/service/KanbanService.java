@@ -12,7 +12,7 @@ public class KanbanService implements MessageService<KanbanMessage>{
     @PostMapping("/orders/processKanban")
     @ResponseBody
     @Override
-    public boolean processOrder(KanbanMessage message) {
+    public boolean processMessage(KanbanMessage message) {
         return false;
     }
 }
