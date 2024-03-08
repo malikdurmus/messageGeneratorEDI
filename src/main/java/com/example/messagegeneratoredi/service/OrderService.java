@@ -1,27 +1,24 @@
 package com.example.messagegeneratoredi.service;
 
-import com.example.messagegeneratoredi.OrderData;
+import com.example.messagegeneratoredi.datastructure.OrderMessage;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 @Service
-public class OrderService implements MessageService<OrderData> {
+public class OrderService implements MessageService<OrderMessage> {
 
 
     @PostMapping("/orders/processOrder")
     @ResponseBody
     @Override
-    public boolean processOrder(@RequestBody OrderData orderData) { //OrderData should changed -> OrderMessage
+    public boolean processMessage(OrderMessage orderMessage) {
         // Process the order data here
-        System.out.println("Received order data: " + orderData.toString());
-        System.out.println("-----------");
-        System.out.println(orderData.getMailPartner());
+        System.out.println("Received order data: " + orderMessage);
 
-        // this function should not return true if there was something wrong with the process ->
-        // program logic is to implement!!
+        // Example: Get a specific value from the order data
+
+        // Return true if the process was successful, otherwise false
         return true;
-
     }
+
 }
