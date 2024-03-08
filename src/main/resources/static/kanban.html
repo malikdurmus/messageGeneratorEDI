@@ -3,134 +3,542 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDIFACT Message Creation - Kanban</title>
-
+    <title>File Naming Process</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
+        .form-group {
             margin-bottom: 20px;
         }
 
-        .form-group {
-            margin-bottom: 10px;
+        /* Custom styles for the fixed button */
+        .fixed-button-container {
+            position: fixed;
+            bottom: 0px;
+            left: 0;
+            right: 0px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            z-index: 9999;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(32, 32, 32, 0.1);
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
+        .selected-directory-container {
+            flex: 1 ;
         }
-
-        .checkbox-group {
-            margin-bottom: 15px;
-        }
-
-        .checkbox-group label {
-            margin-right: 10px;
-        }
-
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #3E8E41;
+        .selected-directory.danger {
+            color: red; /* Set the text color to red */
         }
 
     </style>
 </head>
-<body>
-<div class="container">
-    <h1>Create EDIFACT Kanban Message</h1>
-    <form id="kanban-form">
-        <div class="form-group">
-            <label for="user-abbreviation">User Abbreviation:</label>
-            <input type="text" id="user-abbreviation" name="userAbbreviation" required>
+<body style="background-color: blanchedalmond;">
+<h1 class="display-4">Orders</h1>
+<div class="container m-5 p-2" style="background-color: whitesmoke;">
+
+    <div class="section">
+        <h3 class="display-5">General</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="process">Process:</label>
+                    <input type="text" class="form-control" id="process" placeholder="Please provide the process for file naming">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="selectedDirectoryText">Folder:</label>
+                    <button onclick="selectDirectory()" class="btn btn-lg btn-outline-primary">Select Folder</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="userAbbreviation">User Abbreviation:</label>
+                    <input type="text" class="form-control" id="userAbbreviation" placeholder="Please provide the user abbreviation">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="orgcode">Orgcode:</label>
+                    <input type="text" class="form-control" id="orgcode" value="SCMPD">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="mailpartner">Mailpartner:</label>
+                    <input type="text" class="form-control" id="mailpartner" value="TSTOBLE">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="sellerNo">Seller No.:</label>
+                    <input type="text" class="form-control" id="sellerNo" value="01_WEB">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="plantcode">Plantcode:</label>
+                    <input type="text" class="form-control" id="plantcode" value="POR_03">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="unloading">Unloading:</label>
+                    <input type="text" class="form-control" id="unloading" value="Warehouse">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="unitOfMeasurement">Unit of Measurement:</label>
+                    <select class="form-control" id="unitOfMeasurement">
+                        <option>EA</option>
+                        <option>RB</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="startingNumber">Starting Number:</label>
+                    <input type="number" class="form-control" id="startingNumber" value="1">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="numberOfFiles">Number of Files:</label>
+                    <input type="number" class="form-control" id="numberOfFiles" value="1">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="numberOfPositions">Number of Positions:</label>
+                    <input type="text" class="form-control" id="numberOfPositions" value=".">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="currency">Currency:</label>
+                    <input type="text" class="form-control" id="currency" value="EUR">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="delivery">Delivery:</label>
+                    <input type="text" class="form-control" id="delivery" value="DY">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="consigneeLevel">Level of Consignee:</label>
+                    <select class="form-control" id="consigneeLevel">
+                        <option>Order level</option>
+                        <option>Position level</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="invoiceeLevel">Level of Invoicee:</label>
+                    <select class="form-control" id="invoiceeLevel">
+                        <option>Order level</option>
+                        <option>Position level</option>
+                    </select>
+                </div>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="organisation-code">Organisation Code:</label>
-            <input type="text" id="organisation-code" name="orgCode" required>
-        </div>
-        <div class="form-group">
-            <label for="mail-partner">Mail Partner:</label>
-            <input type="text" id="mail-partner" name="mailPartner" required>
-        </div>
-        <div class="form-group">
-            <label for="seller-no">Seller No:</label>
-            <input type="text" id="seller-no" name="sellerNo" required>
-        </div>
-        <div class="form-group">
-            <label for="plant-code">Plant Code:</label>
-            <input type="text" id="plant-code" name="plantCode" required>
-        </div>
-        <div class="checkbox-group">
-            <label for="today">Today</label>
-            <input type="checkbox" id="today" name="deliveryDates[]" value="Today">
-            <label for="tomorrow">Tomorrow</label>
-            <input type="checkbox" id="tomorrow" name="deliveryDates[]" value="Tomorrow">
-        </div>
-        <button type="submit">Create Message</button>
-    </form>
+    </div>
 </div>
 
-<script>
-    const form = document.getElementById('kanban-form');
+<div class="accordion m-5" id="accordionPanelsStayOpen">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#requiredCollapse" aria-expanded="true" aria-controls="requiredCollapse">
+                Required
+            </button>
+        </h2>
+        <div id="requiredCollapse" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="serviceStringAdvice">
+                            <label class="form-check-label" for="serviceStringAdvice">
+                                Service String Advice (No.1)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="interchangeHeader">
+                            <label class="form-check-label" for="interchangeHeader">
+                                Interchange Header (No.2)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="messageHeader">
+                            <label class="form-check-label" for="messageHeader">
+                                Message Header (No.3)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="beginningOfMessage">
+                            <label class="form-check-label" for="beginningOfMessage">
+                                Beginning of the Message (No.4)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="sectionControl">
+                            <label class="form-check-label" for="sectionControl">
+                                Section Control (No.274)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="messageTrailer">
+                            <label class="form-check-label" for="messageTrailer">
+                                Message Trailer (No.281)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="interchangeTrailer">
+                            <label class="form-check-label" for="interchangeTrailer">
+                                Interchange Trailer (No.282)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    form.addEventListener('submit', (event) => {
-        event.preventDefault();
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#dataSegmentsCollapse" aria-expanded="false" aria-controls="dataSegmentsCollapse">
+                Data Segments
+            </button>
+        </h2>
 
-        const data = {
-            userAbbreviation: document.getElementById('user-abbreviation').value,
-            orgCode: document.getElementById('organisation-code').value,
-            mailPartner: document.getElementById('mail-partner').value,
-            sellerNo: document.getElementById('seller-no').value,
-            plantCode: document.getElementById('plant-code').value,
-            deliveryDates: []
-        };
+        <div id="dataSegmentsCollapse" class="accordion-collapse show">
+            <div class="accordion-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input checkbox-trigger" type="checkbox" value="" id="orderDateCheckbox" data-bs-target="#orderDateTextbox">
+                            <label class="form-check-label" for="orderDateCheckbox">
+                                Order Date
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="orderDateTextbox" placeholder="MM/DD/YYYY" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input checkbox-trigger" type="checkbox" value="" id="validityStartDateCheckbox" data-bs-target="#validityStartDateTextbox">
+                            <label class="form-check-label" for="validityStartDateCheckbox">
+                                Validity Start Date
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="validityStartDateTextbox" placeholder="MM/DD/YYYY" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input checkbox-trigger" type="checkbox" value="" id="expiryDateCheckbox" data-bs-target="#expiryDateTextbox">
+                            <label class="form-check-label" for="expiryDateCheckbox">
+                                Expiry Date
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="expiryDateTextbox" placeholder="MM/DD/YYYY" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input checkbox-trigger" type="checkbox" value="" id="individualDateInformationCheckbox" data-bs-target="#individualDateInformationTextbox">
+                            <label class="form-check-label" for="individualDateInformationCheckbox">
+                                Individual Date Information
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="individualDateInformationTextbox" placeholder="MM/DD/YYYY" disabled>
+                    </div>
+                </div>
+            </div> <!-- End of accordion-body -->
 
-        const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]:checked');
-        checkboxes.forEach(checkbox => {
-            data.deliveryDates.push(checkbox.value);
-        });
-        console.log("Sending data to backend:", JSON.stringify(data));
+        </div>
+    </div> <!-- End of accordion-item -->
 
-        fetch('/kanban/processKanban', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Network response was not ok: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(responseData => {
-                console.log("Data sent successfully:", responseData);
-                // Handle further actions based on response data
-            })
-            .catch(error => {
-                console.error("Error sending data:", error);
-                // Handle any errors that occurred
-            });
-    });
-</script>
+
+
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#additionalInformationSegmentsCollapse" aria-expanded="false" aria-controls="additionalInformationSegmentsCollapse">
+                Additional Information Segments
+            </button>
+        </h2>
+
+        <div id="additionalInformationSegmentsCollapse" class="accordion-collapse show">
+            <div class="accordion-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check " >
+                            <input class="form-check-input checkbox-trigger" type="checkbox" value="" id="additionalInfo9Checkbox" data-bs-target="#additionalInfo9Textbox">
+                            <label class="form-check-label" for="additionalInfo9Checkbox">
+                                Additional Information No. 9
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="additionalInfo9Textbox" value="Individual Instruction 1" placeholder="MM/DD/YYYY" disabled>
+                    </div>
+                </div>
+
+                <hr> <!-- Divider -->
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input checkbox-trigger" type="checkbox" value="" id="additionalInfo10Checkbox" data-bs-target="#additionalInfo10Textbox1 #additionalInfo10Textbox2 #additionalInfo10Textbox3">
+                            <label class="form-check-label" for="additionalInfo10Checkbox">
+                                Additional Information No. 10
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="additionalInfo10Textbox1" value="BK" disabled>
+                        <small>Delivery Instruction Code (BK,SC,DY,DN)</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 offset-md-6">
+                        <input type="text" class="form-control mt-2" id="additionalInfo10Textbox2" value="AR" disabled>
+                        <small>ASN Creation(AY or AN)</small>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 offset-md-6">
+                        <input type="text" class="form-control mt-2" id="additionalInfo10Textbox3" value="RE" disabled>
+                        <small>Invoice Creation (O,C,S,R,V)</small>
+                    </div>
+                </div>
+
+            </div> <!-- End of accordion-body -->
+        </div>
+
+    </div> <!-- End of accordion-item -->
+
+    <div class="accordion-item">
+        <h3 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#freeTextSegmentsCollapse" aria-expanded="false" aria-controls="freeTextSegmentsCollapse">
+                Free Text Segments
+            </button>
+        </h3>
+
+        <div id="freeTextSegmentsCollapse" class="accordion-collapse show">
+            <div class="accordion-body">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-check">
+                            <input class="form-check-input checkbox-trigger" type="checkbox" value="" id="controlPointProfileReferenceCheckbox" data-bs-target="#controlPointProfileReferenceTextbox">
+                            <label class="form-check-label" for="controlPointProfileReferenceCheckbox">
+                                Control Point Profile Reference
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="controlPointProfileReferenceTextbox" placeholder="Control Point Profile Reference" disabled>
+                        <small>Reference of the alternative Controlpoint Profile</small>
+                    </div>
+                </div>
+
+                <hr> <!-- Divider -->
+                <!-- Checkbox and label pairs Edit the for and id sections -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="corporateIdentityText">
+                            <label class="form-check-label" for="corporateIdentityText">
+                                Corporate Identity Text (No.12)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="additionalInfoFreeText">
+                            <label class="form-check-label" for="additionalInfoFreeText">
+                                Additional Information Free Text (No.14)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="generalInfoTextHeader">
+                            <label class="form-check-label" for="generalInfoTextHeader">
+                                General Information Text (Header)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="priceConditions">
+                            <label class="form-check-label" for="priceConditions">
+                                Price Conditions (No.15)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="mutuallyDefinedText">
+                            <label class="form-check-label" for="mutuallyDefinedText">
+                                Mutually Defined Text (No.16)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="termsOfPayment">
+                            <label class="form-check-label" for="termsOfPayment">
+                                Terms of Payment (No.17)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="deliveryTerms">
+                            <label class="form-check-label" for="deliveryTerms">
+                                Delivery Terms (No.18)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="shippingInstructions">
+                            <label class="form-check-label" for="shippingInstructions">
+                                Shipping Instructions (No.19)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="customsClearance">
+                            <label class="form-check-label" for="customsClearance">
+                                Customs Clearance (No.20)
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr> <!-- Divider -->
+
+                <div class="row"> <!-- first row-->
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="insuranceInstructions">
+                            <label class="form-check-label" for="customsClearance">
+                                Insurance Instructions (No. 21)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="specialInstructions">
+                            <label class="form-check-label" for="specialInstructions">
+                                Special Instructions (No.22)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="configurationText">
+                            <label class="form-check-label" for="configurationText">
+                                Configuration Text (No.23)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <hr> <!-- Divider -->
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                            <input class="form-check-input checkbox-trigger" type="checkbox" value="" id="incoterms" data-bs-target="#incotermsCodeTextbox #incotermsTextTextbox">
+                            <label class="form-check-label" for="incoterms">
+                                Incoterms (No.24)
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="incotermsCodeTextbox" value="DPU" disabled>
+                        <small>Incoterms Code</small>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="incotermsTextTextbox" value="Delivered at place unloaded" disabled>
+                        <small>Incoterms Text</small>
+                    </div>
+                    <!-- Similar rows for other checkboxes and textboxes CONTINUE HERE-->
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>  <!-- End of accordion-item -->
+
+
+
+</div>
+
+
+
+
+
+<div class="fixed-button-container">
+    <div class="selected-directory-container">
+        <p class="selected-directory danger " id="selectedDirectoryText">Directory: None</p>
+    </div>
+    <button class="btn btn-primary" id="generateMessageButton">Generate Message</button>
+    <button class="btn btn-secondary">Select Min</button>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+
+
+<script src="js/kanban.js"></script>
 </body>
 </html>
